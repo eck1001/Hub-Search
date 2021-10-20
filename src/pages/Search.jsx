@@ -2,19 +2,19 @@ import React from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 
-function Home({ className }) {
-  return <div className={`${className} Home`}></div>;
+function Search({ className }) {
+  return <div className={`${className} Search`}></div>;
 }
 
-Home.propTypes = {
+Search.propTypes = {
   className: PropTypes.string,
 };
 
-Home.defaultProps = {
+Search.defaultProps = {
   className: "",
 };
 
-export default styled(Home)`
+export default styled(Search)`
 box-sizing: border-box;
   width: 100vw;
   height: 100vh;
