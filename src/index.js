@@ -1,13 +1,16 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Search from './pages/Search';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
+import SearchPage from "./pages/Search";
+import reportWebVitals from "./reportWebVitals";
+import { ThemeContextProvider } from "./contexts/ThemeContext";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Search />
+    <ThemeContextProvider>
+      <SearchPage />
+    </ThemeContextProvider>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function
