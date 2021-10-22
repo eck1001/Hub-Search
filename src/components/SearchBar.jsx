@@ -41,7 +41,7 @@ export default styled(SearchBar)`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 225px;
+  width: 100%;
   height: 50px;
   padding: 12px 20px;
   border: 4px solid ${(props) => props.theme.borderColor};

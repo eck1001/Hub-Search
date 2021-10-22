@@ -108,7 +108,8 @@ export default styled(SearchBarCriteria)`
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 225px;
+  min-width: 225px;
+  min-height: 50px;
   height: 50px;
   padding: 12px 20px;
   border: 4px solid ${(props) => props.theme.borderColor};
@@ -117,7 +118,8 @@ export default styled(SearchBarCriteria)`
   overflow: hidden;
 
   &.open {
-    height: 300px;
+    /* height: 300px; */
+    min-height: 300px;
 
     .title {
       /* display: none; */
