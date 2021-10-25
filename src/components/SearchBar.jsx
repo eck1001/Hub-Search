@@ -51,8 +51,4 @@ export default styled(SearchBar)`
       min-width: 120px;
       border: none;
   }
-
-  .magnifying-glass{
-
-  }
 `;

@@ -26,7 +26,7 @@ function SearchBarCriteria({ className }) {
               value="Best_Match"
               id="best-match"
               checked
-              onChange={handleCheckBoxChange}
+              onChange={handleRadioBoxChange}
             />
             <label htmlFor="best-match">Best Match</label>
           </div>
@@ -36,7 +36,7 @@ function SearchBarCriteria({ className }) {
               name="sortBy"
               value="Most_Stars"
               id="most-stars"
-              onChange={handleCheckBoxChange}
+              onChange={handleRadioBoxChange}
             />
             <label htmlFor="most-stars">Most Stars</label>
           </div>
@@ -118,7 +118,6 @@ export default styled(SearchBarCriteria)`
   overflow: hidden;
 
   &.open {
-    /* height: 300px; */
     min-height: 300px;
 
     .title {
