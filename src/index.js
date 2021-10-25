@@ -1,13 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import SearchPage from "./pages/Search";
+// import SearchPage from "./pages/Search";
 import reportWebVitals from "./reportWebVitals";
 import { ThemeContextProvider } from "./contexts/ThemeContext";
+import NavigationBar from "./NavigationBar";
 
 ReactDOM.render(
   <React.StrictMode>
     <ThemeContextProvider>
-      <SearchPage />
+      <NavigationBar />
     </ThemeContextProvider>
   </React.StrictMode>,
   document.getElementById("root")

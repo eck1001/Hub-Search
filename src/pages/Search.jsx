@@ -20,6 +20,7 @@ function Search({ className }) {
 
 Search.propTypes = {
   className: PropTypes.string,
+  theme: PropTypes.instanceOf(ThemeContext),
 };
 
 Search.defaultProps = {
