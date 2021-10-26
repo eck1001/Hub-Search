@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 import { ThemeContext } from "@emotion/react";
 import { useParams } from "react-router-dom";
 import { ReactComponent as Star } from "../assets/Star.svg";
+import { ReactComponent as Carrot } from "../assets/Carrot.svg";
+import { Link } from "react-router-dom";
 
 function Details({ className }) {
   let { id } = useParams();
@@ -40,6 +42,10 @@ function Details({ className }) {
         facilisis mauris sit amet massa vitae. Erat imperdiet sed euismod nisi
         porta lorem mollis. Nibh mauris cursus mattis molestie.
       </p>
+      <div className="link-container">
+        <Carrot />
+        <Link to={`/`}>Back To Search</Link>
+      </div>
     </div>
   );
 }
@@ -54,7 +60,7 @@ Details.defaultProps = {
 };
 
 export default styled(Details)`
-  margin: 20px 5%;
+  margin: 40px 5%;
 
   background-color: white;
   display: grid;
@@ -123,6 +129,26 @@ export default styled(Details)`
     margin: 0;
   }
 
+  .link-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    margin: 15px 5%;
+    height: 12px;
+    cursor: pointer;
+
+    a {
+      color: unset;
+      text-decoration: unset;
+    }
+
+    svg {
+      fill: ${(props) => props.theme.pink};
+    }
+  }
+
   @media only screen and (max-device-width: 480px) {
     display: flex;
     flex-direction: column;
@@ -133,7 +159,7 @@ export default styled(Details)`
 
     .stars-container {
       position: absolute;
-      top: 60px;
+      top: 80px;
       right: 30px;
     }
   }

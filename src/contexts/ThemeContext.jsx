@@ -10,6 +10,7 @@ const ThemeContextProvider = props => {
   const borderColor = '#000000';
   const golden = '#FFE600';
   const mint = '#00FFB2';
+  const pink = '#DB00FF';
 
   return (
     <ThemeContext.Provider
@@ -19,6 +20,7 @@ const ThemeContextProvider = props => {
         borderColor,
         golden,
         mint,
+        pink,
       }}
     >
       {props.children}
