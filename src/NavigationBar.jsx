@@ -1,7 +1,7 @@
 import { BrowserRouter as Router } from 'react-router-dom';
 import React from 'react';
 import styled from '@emotion/styled';
-import Routes from './routes';
+import Routes from './Routes';
 
 function NavigationBar() {
   return (
