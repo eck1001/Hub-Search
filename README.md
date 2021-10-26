@@ -1,4 +1,4 @@
-# Getting Started with Create React App
+# ----- Bootstrapped CRA Docs -----
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -45,36 +45,18 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-
-
-
+# ----- Ends Bootstrapped CRA Docs -----
 
 ### To Run
-- PREREQ: node 14 (if using nvm)
+- PREREQ: node 14 (if using nvm) 
+    NOTE: May work on other versions, but untested.
+    (Create React App does not work out of the gate with Node 17)
     - `nvm ls`
-    - `nvm use v14.__.__`
+    - `nvm install v14.15.5` (if not already installed)
+    - `nvm use v14.15.5`
 
 - Run app with `npm`: `npm run start`
+
+### Run with Docker
+
+# TBD
