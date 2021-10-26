@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
-import { ThemeContext } from "@emotion/react";
+import { ThemeContext } from "../contexts/ThemeContext";
 import { useParams } from "react-router-dom";
 import { ReactComponent as Star } from "../assets/Star.svg";
 import { ReactComponent as Carrot } from "../assets/Carrot.svg";
