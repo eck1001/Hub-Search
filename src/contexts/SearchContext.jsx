@@ -4,14 +4,24 @@ import PropTypes from "prop-types";
 
 const SearchContext = React.createContext({});
 
+const RADIO_BUTTONS = {
+  best_match: "Best_Match",
+  most_stars: "Most_stars",
+};
+
 const SearchContextProvider = (props) => {
   const [searchResults, setSearchResults] = useState([]);
+  const [radioSelection, setRadioSelection] = useState(
+    RADIO_BUTTONS.best_match
+  );
 
   return (
     <SearchContext.Provider
       value={{
         searchResults,
         setSearchResults,
+        radioSelection,
+        setRadioSelection,
       }}
     >
       {props.children}
@@ -35,4 +45,9 @@ const withSearchContext = (Component) => (props) =>
     </SearchContextProvider>
   );
 
-export { SearchContext, SearchContextProvider, withSearchContext };
+export {
+  SearchContext,
+  SearchContextProvider,
+  withSearchContext,
+  RADIO_BUTTONS,
+};

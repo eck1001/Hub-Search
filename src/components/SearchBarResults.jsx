@@ -3,12 +3,37 @@ import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import { ThemeContext } from "../contexts/ThemeContext";
 import SearchBarResultsItem from "./SearchBarResultsItem";
-import { SearchContext } from "../contexts/SearchContext";
+import { SearchContext, RADIO_BUTTONS } from "../contexts/SearchContext";
 
 function SearchBarResults({ className }) {
-  const { searchResults } = useContext(SearchContext);
+  const { searchResults, radioSelection } = useContext(SearchContext);
 
-  const searchBarResultItems = searchResults.map((resultItem) => {
+  let sortedSearchResults = null;
+  if(radioSelection === RADIO_BUTTONS.most_stars){
+    sortedSearchResults = JSON.parse(JSON.stringify(searchResults)); // clones object
+
+    /**
+     * We want high to low sorting with 'unknown'(s) on the bottom of the sorted list.
+     * Alg High Level Summary:
+     *  - Positive return values move the first element down the list.
+     *  - Negative return values move the second element down the list.
+     *  - The list is rendered top -> bottom.
+     *  - We want max stars on top (decending in value) e.i index == 0, 
+     */
+    const SORT_BEFORE = 1;
+    const SORT_AFTER = -1;
+    sortedSearchResults.sort( (firstItem, secondItem)  => {
+      if(firstItem.stars === 'unknown') {
+        return SORT_BEFORE;
+      }
+      if(secondItem.stars === 'unknown') {
+        return SORT_AFTER;
+      }
+      return secondItem.stars - firstItem.stars;
+    });
+  }
+
+  const searchBarResultItems = (sortedSearchResults || searchResults).map((resultItem) => {
     const { name, id } = resultItem;
 
     return <SearchBarResultsItem

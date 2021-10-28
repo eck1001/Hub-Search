@@ -1,15 +1,21 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { ReactComponent as Filter } from "../assets/Filter.svg";
+import { SearchContext, RADIO_BUTTONS } from "../contexts/SearchContext";
 
 function SearchBarCriteria({ className }) {
   const [open, setOpen] = useState(true);
+  const { radioSelection, setRadioSelection } = useContext(SearchContext);
 
-  const handleCheckBoxChange = () => {};
+  const handleCheckBoxChange = (event) => {
+    console.log(event);
+  };
 
-  const handleRadioBoxChange = () => {};
+  const handleRadioBoxChange = (event) => {
+    setRadioSelection(event.target.value);
+  };
 
   return (
     <div className={`${className} ${open ? "open" : ""}`}>
@@ -23,9 +29,9 @@ function SearchBarCriteria({ className }) {
             <input
               type="radio"
               name="sortBy"
-              value="Best_Match"
+              value={RADIO_BUTTONS.best_match}
               id="best-match"
-              checked
+              checked={radioSelection === RADIO_BUTTONS.best_match}
               onChange={handleRadioBoxChange}
             />
             <label htmlFor="best-match">Best Match</label>
@@ -34,8 +40,9 @@ function SearchBarCriteria({ className }) {
             <input
               type="radio"
               name="sortBy"
-              value="Most_Stars"
+              value={RADIO_BUTTONS.most_stars}
               id="most-stars"
+              checked={radioSelection === RADIO_BUTTONS.most_stars}
               onChange={handleRadioBoxChange}
             />
             <label htmlFor="most-stars">Most Stars</label>
@@ -114,7 +121,7 @@ export default styled(SearchBarCriteria)`
   padding: 12px 20px;
   border: 4px solid ${(props) => props.theme.borderColor};
   border-radius: 6px;
-  transition: .8s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
   overflow: hidden;
 
   &.open {
@@ -137,12 +144,12 @@ export default styled(SearchBarCriteria)`
   }
 
   .on-open-container {
-    transition: opacity .8s cubic-bezier(0.2, 0.8, 0.2, 1);
+    transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
     opacity: 0;
   }
 
   .title {
-    transition-delay: .4s;
+    transition-delay: 0.4s;
     opacity: 1;
     cursor: pointer;
   }
