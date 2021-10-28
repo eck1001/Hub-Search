@@ -1,60 +1,49 @@
-import React, { useState, useEffect, useContext } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useState, useEffect, useContext, useMemo } from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { ReactComponent as MagnifyingGlass } from "../assets/MagnifyingGlass.svg";
-import { request } from "@octokit/request";
 import { SearchContext } from "../contexts/SearchContext";
+import debounce from "lodash.debounce";
+import { searchRepositories } from "../models/SearchModel";
 
 function SearchBar({ className }) {
-  const [searchInput, setSearchInput] = useState("");
+  const [fetchError, setFetchError] = useState(null);
   const { setSearchResults } = useContext(SearchContext);
 
-  const fetchRepositories = async () => {
-    try {
-      /**
-       * Octokit request DOCS: https://github.com/octokit/request.js
-       * Constructing a search query: https://docs.github.com/en/rest/reference/search#constructing-a-search-query
-       */
-      const results = await request("GET /search/repositories", {
-        q: searchInput,
-      });
-      const { items } = results.data;
-
-      // const name; - name
-      // const author; - owner:login
-      // const language; - language
-      // const stars; - stargazers_count
-      // const description - description
-
-      // TODO: filter these items to only data that is needed.
-      setSearchResults(items);
-
-      console.log(items);
-    } catch (error) {
-      /**
-       * Limitations of GitHUb API:
-       * https://docs.github.com/en/rest/reference/search#limitations-on-query-length
-       */
-      alert(
-        "Invalid Query, Rate Limit Reached, or General Error while fetching data"
-      );
-      console.error("Error Fetching Repositories", error);
-    }
-  };
+  console.log(fetchError);
 
   const handleChange = (event) => {
-    const input = event.currentTarget.value;
+    const query = event.target.value;
 
-    setSearchInput(input);
+    // TODO: query input validation here
+
+    if (query) {
+      searchRepositories(query)
+        .then((results) => setSearchResults(results))
+        .catch((error) => setFetchError(error));
+    }
   };
 
+  /**
+   * Memoize prevents the need to call debounce on each render.
+   * Also, eliminating the need to use `UseCallback` to maintain the same `handleChange` function instance.
+   */
+  const THREE_HUNDRED_MILLISECONDS = 300;
+  const debouncedHandleChange = useMemo(
+    () => debounce(handleChange, THREE_HUNDRED_MILLISECONDS),
+    []
+  );
+
+  /**
+   * Cancel queued debounce calls on un-mount
+   */
   useEffect(() => {
-    if (searchInput) {
-      fetchRepositories();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchInput]);
+    return () => {
+      debouncedHandleChange.cancel();
+    };
+  }, []);
 
   return (
     <div className={className}>
@@ -63,8 +52,7 @@ function SearchBar({ className }) {
         placeholder="Search Here ..."
         className="search-bar"
         name="search-bar"
-        onChange={handleChange}
-        value={searchInput}
+        onChange={debouncedHandleChange}
       />
       <MagnifyingGlass className="magnifying-glass" />
     </div>

@@ -22,8 +22,8 @@ export default function Routes() {
         <Route path="/details/:id">
           <Details theme={theme} />
         </Route>
-        <Route exact theme={theme} path="/">
-          <Search />
+        <Route exact path="/">
+          <Search theme={theme} />
         </Route>
       </Switch>
     </Suspense>

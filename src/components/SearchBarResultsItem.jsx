@@ -4,10 +4,10 @@ import PropTypes from "prop-types";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { Link } from "react-router-dom";
 
-function SearchBarResultsItem({ className }) {
+function SearchBarResultsItem({ className, name, id }) {
   return (
-    <Link className={className} to={`/details/1`}>
-      Results
+    <Link className={className} to={`/details/${id}`}>
+      {name}
     </Link>
   );
 }
@@ -15,6 +15,8 @@ function SearchBarResultsItem({ className }) {
 SearchBarResultsItem.propTypes = {
   className: PropTypes.string,
   theme: PropTypes.instanceOf(ThemeContext),
+  name: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
 };
 
 SearchBarResultsItem.defaultProps = {
@@ -26,10 +28,10 @@ export default styled(SearchBarResultsItem)`
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  height: 50px;
   padding: 6px 10px;
   border: 4px solid ${(props) => props.theme.borderColor};
   border-radius: 6px;
+  overflow-wrap: anywhere;
   cursor: pointer;
   color: unset;
   text-decoration: unset;

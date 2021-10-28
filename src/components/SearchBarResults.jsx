@@ -1,19 +1,27 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import { ThemeContext } from "../contexts/ThemeContext";
 import SearchBarResultsItem from "./SearchBarResultsItem";
+import { SearchContext } from "../contexts/SearchContext";
 
 function SearchBarResults({ className }) {
+  const { searchResults } = useContext(SearchContext);
+
+  const searchBarResultItems = searchResults.map((resultItem) => {
+    const { name, id } = resultItem;
+
+    return <SearchBarResultsItem
+      name={name}
+      id={id}
+      key={id}
+    />;
+  });
+
   return (
     <div className={className}>
       <div className="scroll-container">
-        <SearchBarResultsItem />
-        <SearchBarResultsItem />
-        <SearchBarResultsItem />
-        <SearchBarResultsItem />
-        <SearchBarResultsItem />
-        <SearchBarResultsItem />
+        {searchBarResultItems}
         <div className="whitespace" />
       </div>
       <hr />
@@ -37,6 +45,7 @@ export default styled(SearchBarResults)`
   padding: 12px 20px;
   border: 4px solid ${(props) => props.theme.borderColor};
   border-radius: 6px;
+
   .scroll-container {
     overflow: scroll;
     display: flex;

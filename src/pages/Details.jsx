@@ -1,4 +1,5 @@
-import React from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import { ThemeContext } from "../contexts/ThemeContext";
@@ -6,15 +7,25 @@ import { useParams } from "react-router-dom";
 import { ReactComponent as Star } from "../assets/Star.svg";
 import { ReactComponent as Carrot } from "../assets/Carrot.svg";
 import { Link } from "react-router-dom";
+import { getRepositoryById } from "../models/SearchModel";
 
 function Details({ className }) {
+  const [fetchError, setFetchError] = useState(null);
+  const [repoDetails, setRepoDetails] = useState({});
   let { id } = useParams();
-  const author = "Elijah Kramer";
-  const language = "JavaScript";
+
+  useEffect(() => {
+    console.log(id);
+    getRepositoryById(id)
+      .then((results) => setRepoDetails(results))
+      .catch((error) => setFetchError(error));
+  }, []);
+
+  let { name, author, language, stars, description } = repoDetails;
 
   return (
     <div className={className}>
-      <span className="repo-name">Repository Name: {id}</span>
+      <span className="repo-name">{name}</span>
       <div className="stars-container">
         <Star className="star" />
         <Star className="star" />
@@ -25,27 +36,11 @@ function Details({ className }) {
       <hr />
       <span className="author">Author: {author}</span>
       <span className="language">Language: {language}</span>
-      <p className="description">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ipsum faucibus vitae
-        aliquet nec ullamcorper sit amet risus. Mollis aliquam ut porttitor leo
-        a diam. Elementum sagittis vitae et leo. Ipsum dolor sit amet
-        consectetur adipiscing. Duis ultricies lacus sed turpis tincidunt id.
-        Pretium vulputate sapien nec sagittis aliquam malesuada bibendum arcu
-        vitae. Dictum fusce ut placerat orci nulla pellentesque dignissim enim
-        sit. Mauris augue neque gravida in fermentum et sollicitudin. Habitant
-        morbi tristique senectus et netus et malesuada fames ac. Sapien eget mi
-        proin sed libero. Pretium fusce id velit ut tortor pretium viverra.
-        Scelerisque eu ultrices vitae auctor eu augue ut lectus. Ipsum faucibus
-        vitae aliquet nec. Sed vulputate odio ut enim blandit volutpat. Quis
-        imperdiet massa tincidunt nunc pulvinar sapien et ligula. Volutpat odio
-        facilisis mauris sit amet massa vitae. Erat imperdiet sed euismod nisi
-        porta lorem mollis. Nibh mauris cursus mattis molestie.
-      </p>
-      <div className="link-container">
+      <p className="description">{description}</p>
+      <Link to={`/`}>
         <Carrot />
-        <Link to={`/`}>Back To Search</Link>
-      </div>
+        Back To Search
+      </Link>
     </div>
   );
 }
@@ -129,7 +124,7 @@ export default styled(Details)`
     margin: 0;
   }
 
-  .link-container {
+  a {
     position: absolute;
     top: 0;
     right: 0;
@@ -137,12 +132,9 @@ export default styled(Details)`
     align-items: center;
     margin: 15px 5%;
     height: 12px;
-    cursor: pointer;
 
-    a {
-      color: unset;
-      text-decoration: unset;
-    }
+    color: unset;
+    text-decoration: unset;
 
     svg {
       fill: ${(props) => props.theme.pink};

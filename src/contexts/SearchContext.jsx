@@ -1,10 +1,10 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from "react";
+import PropTypes from "prop-types";
 
 const SearchContext = React.createContext({});
 
-const SearchContextProvider = props => {
+const SearchContextProvider = (props) => {
   const [searchResults, setSearchResults] = useState([]);
 
   return (
@@ -28,10 +28,11 @@ SearchContextProvider.propTypes = {
  *  EX:
  *      export default withSearchContext(MyComponentUsingThisContext);
  */
-const withSearchContext = Component => props => (
-  <SearchContextProvider>
-    <Component {...props} />
-  </SearchContextProvider>
-);
+const withSearchContext = (Component) => (props) =>
+  (
+    <SearchContextProvider>
+      <Component {...props} />
+    </SearchContextProvider>
+  );
 
 export { SearchContext, SearchContextProvider, withSearchContext };
