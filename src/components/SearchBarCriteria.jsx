@@ -3,14 +3,23 @@ import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { ReactComponent as Filter } from "../assets/Filter.svg";
-import { SearchContext, RADIO_BUTTONS } from "../contexts/SearchContext";
+import {
+  SearchContext,
+  RADIO_BUTTONS,
+  CHECKBOX_BUTTONS,
+} from "../contexts/SearchContext";
 
 function SearchBarCriteria({ className }) {
   const [open, setOpen] = useState(true);
-  const { radioSelection, setRadioSelection } = useContext(SearchContext);
+  const {
+    radioSelection,
+    setRadioSelection,
+    toggleCheckboxSelection,
+  } = useContext(SearchContext);
 
   const handleCheckBoxChange = (event) => {
-    console.log(event);
+    const { id: key } = event.target;
+    toggleCheckboxSelection(key);
   };
 
   const handleRadioBoxChange = (event) => {
@@ -55,45 +64,100 @@ function SearchBarCriteria({ className }) {
             <input
               type="checkbox"
               name="filterBy"
-              value="Javascript"
+              value={CHECKBOX_BUTTONS.javascript}
               id="javascript"
               defaultChecked
               onChange={handleCheckBoxChange}
             />
-            <label htmlFor="javascript">Javascript</label>
+            <label htmlFor="javascript">{CHECKBOX_BUTTONS.javascript}</label>
           </div>
           <div className="checkbox-field">
             <input
               type="checkbox"
               name="filterBy"
-              value="PHP"
+              value={CHECKBOX_BUTTONS.php}
               id="php"
               defaultChecked
               onChange={handleCheckBoxChange}
             />
-            <label htmlFor="php">PHP</label>
+            <label htmlFor="php">{CHECKBOX_BUTTONS.php}</label>
           </div>
           <div className="checkbox-field">
             <input
               type="checkbox"
               name="filterBy"
-              value="Java"
+              value={CHECKBOX_BUTTONS.java}
               id="java"
               defaultChecked
               onChange={handleCheckBoxChange}
             />
-            <label htmlFor="java">Java</label>
+            <label htmlFor="java">{CHECKBOX_BUTTONS.java}</label>
           </div>
           <div className="checkbox-field">
             <input
               type="checkbox"
               name="filterBy"
-              value="C++"
-              id="c++"
+              value={CHECKBOX_BUTTONS.c_plus_plus}
+              id="c_plus_plus"
               defaultChecked
               onChange={handleCheckBoxChange}
             />
-            <label htmlFor="c++">C++</label>
+            <label htmlFor="c++">{CHECKBOX_BUTTONS.c_plus_plus}</label>
+          </div>
+          <div className="checkbox-field">
+            <input
+              type="checkbox"
+              name="filterBy"
+              value={CHECKBOX_BUTTONS.html}
+              id="html"
+              defaultChecked
+              onChange={handleCheckBoxChange}
+            />
+            <label htmlFor="html">{CHECKBOX_BUTTONS.html}</label>
+          </div>
+          <div className="checkbox-field">
+            <input
+              type="checkbox"
+              name="filterBy"
+              value={CHECKBOX_BUTTONS.python}
+              id="python"
+              defaultChecked
+              onChange={handleCheckBoxChange}
+            />
+            <label htmlFor="python">{CHECKBOX_BUTTONS.python}</label>
+          </div>
+          <div className="checkbox-field">
+            <input
+              type="checkbox"
+              name="filterBy"
+              value={CHECKBOX_BUTTONS.css}
+              id="css"
+              defaultChecked
+              onChange={handleCheckBoxChange}
+            />
+            <label htmlFor="css">{CHECKBOX_BUTTONS.css}</label>
+          </div>
+          <div className="checkbox-field">
+            <input
+              type="checkbox"
+              name="filterBy"
+              value={CHECKBOX_BUTTONS.ruby}
+              id="ruby"
+              defaultChecked
+              onChange={handleCheckBoxChange}
+            />
+            <label htmlFor="ruby">{CHECKBOX_BUTTONS.ruby}</label>
+          </div>
+          <div className="checkbox-field">
+            <input
+              type="checkbox"
+              name="filterBy"
+              value={CHECKBOX_BUTTONS.c}
+              id="c"
+              defaultChecked
+              onChange={handleCheckBoxChange}
+            />
+            <label htmlFor="c">{CHECKBOX_BUTTONS.c}</label>
           </div>
           <hr />
         </div>
@@ -125,7 +189,7 @@ export default styled(SearchBarCriteria)`
   overflow: hidden;
 
   &.open {
-    min-height: 300px;
+    min-height: 450px;
 
     .title {
       /* display: none; */

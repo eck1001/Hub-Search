@@ -1,29 +1,48 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect, useContext, useMemo } from "react";
+import React, { useState, useEffect, useContext, useMemo, useRef } from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { ReactComponent as MagnifyingGlass } from "../assets/MagnifyingGlass.svg";
-import { SearchContext } from "../contexts/SearchContext";
+import { SearchContext, CHECKBOX_BUTTONS } from "../contexts/SearchContext";
 import debounce from "lodash.debounce";
 import { searchRepositories } from "../models/SearchModel";
 
 function SearchBar({ className }) {
   const [fetchError, setFetchError] = useState(null);
-  const { setSearchResults } = useContext(SearchContext);
-
-  console.log(fetchError);
+  const { searchResults, setSearchResults, checkboxSelection } = useContext(SearchContext);
+  const searchInput = useRef(null);
 
   const handleChange = (event) => {
     const query = event.target.value;
+    querySearchRepositories(query);
+  }
 
-    // TODO: query input validation here
+  const querySearchRepositories = (query) => {
 
-    if (query) {
-      searchRepositories(query)
-        .then((results) => setSearchResults(results))
-        .catch((error) => setFetchError(error));
+    if (!query) {
+      return;
     }
+
+    const INITIAL_FILTER = "";
+    const languageFilter = Object.keys(checkboxSelection).reduce(
+      (accumulator, key) => {
+        if (checkboxSelection[key]) {
+          return accumulator + ` language:${CHECKBOX_BUTTONS[key]}`;
+        }
+        return accumulator;
+      },
+      INITIAL_FILTER
+    );
+
+    query += languageFilter;
+
+    searchRepositories(query)
+      .then((results) => {
+        console.debug(results);
+        setSearchResults(results);
+      })
+      .catch((error) => setFetchError(error));
   };
 
   /**
@@ -33,9 +52,26 @@ function SearchBar({ className }) {
   const THREE_HUNDRED_MILLISECONDS = 300;
   const debouncedHandleChange = useMemo(
     () => debounce(handleChange, THREE_HUNDRED_MILLISECONDS),
-    []
+    [checkboxSelection]
   );
 
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      /* Cancel queued debounced calls */
+      debouncedHandleChange.cancel();
+      handleChange(event);
+    }
+  };
+
+  useEffect( () => {
+    if(!searchResults){
+      return;
+    }
+    /* New query with updated filters */
+    const {value: query } = searchInput.current;
+    querySearchRepositories(query);
+
+  }, [checkboxSelection])
   /**
    * Cancel queued debounce calls on un-mount
    */
@@ -53,6 +89,8 @@ function SearchBar({ className }) {
         className="search-bar"
         name="search-bar"
         onChange={debouncedHandleChange}
+        onKeyDown={handleKeyDown}
+        ref={searchInput}
       />
       <MagnifyingGlass className="magnifying-glass" />
     </div>

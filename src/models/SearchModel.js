@@ -1,7 +1,7 @@
 import { request } from "@octokit/request";
 
 const searchRepositories = async (query) => {
-  console.debug("calling with", query);
+  console.debug("calling query: ", query);
   try {
     /**
      * Octokit request DOCS: https://github.com/octokit/request.js
@@ -41,7 +41,7 @@ const searchRepositories = async (query) => {
 };
 
 const getRepositoryById = async (id) => {
-  console.debug("calling with id:", id);
+  console.debug("calling with id: ", id);
   try {
     const results = await request(`GET /repositories/${id}`);
 
