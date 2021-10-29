@@ -23,7 +23,7 @@
     - Additional server configuration may be wanted, but defaults will be `port` : `8080`.
 
 # Troubleshooting 👾
- - Is you port busy? You may need to kill the process on that port or change the runtime port.
+ - Is your port busy? You may need to kill the process on that port or change the runtime port.
  - Do you have the correct version of node installed?
  - Have you ran `npm i`?
  - Sometimes npm can be wierd, try cleaning `node_modules/` and re-installing or runnning `npm ci`
