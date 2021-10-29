@@ -1,4 +1,4 @@
-### To Run
+# To Run 👟
 - PREREQ: node 14 (if using nvm) 
     NOTE: May work on other versions, but untested.
     (Create React App does not work out of the gate with Node 17)
@@ -9,11 +9,11 @@
 - Install NPM Dependencies `npm i`
 
 
-# Development
+# Development 🚧
 
 - Run app with `npm`: `npm run start` or `npm start`
 
-# Production
+# Production 🚀
 
 - Build App via `npm` : `npm run build`
     - this will create a `/build` directory at the project root level
@@ -22,25 +22,29 @@
     - If `http-server` is installed globally (`npm i -g http-server`) then you can alternatively run `http-server ./build`
     - Additional server configuration may be wanted, but defaults will be `port` : `80880`.
 
-# Troubleshooting
+# Troubleshooting 👾
  - Is you port busy? You may need to kill the process on that port or change the runtime port.
  - Do you have the correct version of node installed?
  - Have you ran `npm i`?
  - Sometimes npm can be wierd, try cleaning `node_modules/` and re-installing or runnning `npm ci`
 
-### Run with Docker
+# Figma Design File 
+
+I designed this project with Figma, check out my [Design File](https://www.figma.com/file/cztD8Js3ZPMEwi2QVEe9z8/Hub-Search?node-id=0%3A1).
+
+# Future Efforts
+### Run with Docker 
+
+<img src="https://user-images.githubusercontent.com/29557802/139472944-02c486a3-4a78-4c13-8cfe-7c48c4fb65e0.png" alt="drawing" width="200"/>
 - TBD
 
-### Tests
-
-# Run 
+### Tests ✅
+#### Run 
  - `npm` : `npm run test`
 
 However, at this time there are no tests :(
 
-# Figma Design File 
 
-I designed this project with Figma, check out my [Design File](https://www.figma.com/file/cztD8Js3ZPMEwi2QVEe9z8/Hub-Search?node-id=0%3A1).
 
 
 # ----- Bootstrapped CRA Docs -----
