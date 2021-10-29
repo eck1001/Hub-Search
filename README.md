@@ -1,3 +1,45 @@
+### To Run
+- PREREQ: node 14 (if using nvm) 
+    NOTE: May work on other versions, but untested.
+    (Create React App does not work out of the gate with Node 17)
+    - `nvm ls`
+    - `nvm install v14.15.5` (if not already installed)
+    - `nvm use v14.15.5`
+
+- Install NPM Dependencies `npm i`
+
+
+# Development
+
+- Run app with `npm`: `npm run start` or `npm start`
+
+# Production
+
+- Build App via `npm` : `npm run build`
+    - this will create a `/build` directory at the project root level
+
+- Run Production Build via `http-server`  : `npx http-server ./build`
+    - If `http-server` is installed globally (`npm i -g http-server`) then you can alternatively run `http-server ./build`
+    - Additional server configuration may be wanted, but defaults will be `port` : `80880`.
+
+# Troubleshooting
+ - Is you port busy? You may need to kill the process on that port or change the runtime port.
+ - Do you have the correct version of node installed?
+ - Have you ran `npm i`?
+ - Sometimes npm can be wierd, try cleaning `node_modules/` and re-installing or runnning `npm ci`
+
+### Run with Docker
+- TBD
+
+### Tests
+
+# Run 
+ - `npm` : `npm run test`
+
+However, at this time there are no tests :(
+
+
+
 # ----- Bootstrapped CRA Docs -----
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -42,21 +84,6 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 ## Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
 To learn React, check out the [React documentation](https://reactjs.org/).
 
 # ----- Ends Bootstrapped CRA Docs -----
-
-### To Run
-- PREREQ: node 14 (if using nvm) 
-    NOTE: May work on other versions, but untested.
-    (Create React App does not work out of the gate with Node 17)
-    - `nvm ls`
-    - `nvm install v14.15.5` (if not already installed)
-    - `nvm use v14.15.5`
-
-- Run app with `npm`: `npm run start`
-
-### Run with Docker
-
-# TBD

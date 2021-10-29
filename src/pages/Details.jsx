@@ -15,7 +15,6 @@ function Details({ className }) {
   let { id } = useParams();
 
   useEffect(() => {
-    console.log(id);
     getRepositoryById(id)
       .then((results) => setRepoDetails(results))
       .catch((error) => setFetchError(error));
