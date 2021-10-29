@@ -28,10 +28,7 @@ function Details({ className }) {
       <span className="repo-name">{name}</span>
       <div className="stars-container">
         <Star className="star" />
-        <Star className="star" />
-        <Star className="star" />
-        <Star className="star" />
-        <Star className="star" />
+        <span>{stars}</span>
       </div>
       <hr />
       <span className="author">Author: {author}</span>
@@ -68,6 +65,7 @@ export default styled(Details)`
   grid-template-rows: 40px 1px 20px 1fr;
   border: 4px solid ${(props) => props.theme.borderColor};
   border-radius: 6px;
+  overflow-wrap: anywhere;
 
   .repo-name {
     grid-area: repo;
@@ -76,22 +74,35 @@ export default styled(Details)`
   }
 
   .stars-container {
+    position: relative;
     justify-self: end;
+    align-self: center;
     grid-area: stars;
-    padding: 10px 30px 0 0;
+    margin-right: 30px;
 
-    display: grid;
-    width: 70px;
-    grid-template-columns: repeat(auto-fit, minmax(0px, max-content));
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    padding-top: 13px;
+    border: 3px solid ${(props) => props.theme.golden};
+    border-radius: 4px;
+    filter: drop-shadow(0px 4px 1px rgba(0,0,0,0.25));
+    background-color: ${(props) => props.theme.golden};
+    background-clip: content-box;
+
+    span {
+      font-size: 10px;
+      font-weight: bold;
+    }
 
     svg {
-      transform: rotate(20deg);
       fill: ${(props) => props.theme.golden};
     }
 
     .star {
-      width: 20px;
-      min-width: 20px;
+      position: absolute;
+      top: -8px;
+      height: 23px;
     }
   }
 
@@ -151,7 +162,7 @@ export default styled(Details)`
 
     .stars-container {
       position: absolute;
-      top: 80px;
+      top: 50px;
       right: 30px;
     }
   }
