@@ -38,6 +38,9 @@
 
 However, at this time there are no tests :(
 
+# Figma Design File 
+
+I designed this project with Figma, check out my [Design File](https://www.figma.com/file/cztD8Js3ZPMEwi2QVEe9z8/Hub-Search?node-id=0%3A1).
 
 
 # ----- Bootstrapped CRA Docs -----
