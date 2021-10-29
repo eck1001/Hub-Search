@@ -20,7 +20,7 @@
 
 - Run Production Build via `http-server`  : `npx http-server ./build`
     - If `http-server` is installed globally (`npm i -g http-server`) then you can alternatively run `http-server ./build`
-    - Additional server configuration may be wanted, but defaults will be `port` : `80880`.
+    - Additional server configuration may be wanted, but defaults will be `port` : `8080`.
 
 # Troubleshooting 👾
  - Is you port busy? You may need to kill the process on that port or change the runtime port.
